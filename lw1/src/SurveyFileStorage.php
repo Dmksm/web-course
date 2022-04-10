@@ -1,7 +1,7 @@
 <?php
 class SurveyFileStorage  
 {
-    private mixed $file;
+    private $file;
     private string $path;
     private string $content;
     private ?string $firstName;
