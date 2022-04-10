@@ -3,20 +3,19 @@ header("Content-Type: text/plain");
 require_once("src/common.inc.php");
 $request = new RequestSurveyLoader;
 $storage = new SurveyFileStorage;
-$printer = new SurveyPrinter;
 $survey = $request->createNewSurvey('first_name', 'last_name', 'email', 'age'); 
 if ($survey)
 {
-    echo "Loading old data from file:\n\n";
+    echo "Loading old data from file:" . PHP_EOL . PHP_EOL;
     $storage->loadFileData($survey, $storage);
-    $printer->printSurvey($survey);
+    SurveyPrinter::printSurvey($survey);
 
-    echo "\nWriting new parameters to file:\n\n";
+    echo PHP_EOL . "Writing new parameters to file:" . PHP_EOL . PHP_EOL;
     $survey = $request->createNewSurvey('first_name', 'last_name', 'email', 'age'); 
     if ($survey)
     {
         $storage->saveData($survey, $storage);
         $storage->loadFileData($survey, $storage);
-        $printer->printSurvey($survey);
+        SurveyPrinter::printSurvey($survey);
     }
 }

@@ -1,7 +1,10 @@
 <?php
-class SurveyFileStorage  
+
+namespace App\Module\Survey;
+
+class SurveyFileStorage
 {
-    private mixed $file;
+    private $file;
     private string $path;
     private string $content;
     private ?string $firstName;
@@ -20,7 +23,7 @@ class SurveyFileStorage
         $storage->writeInFile($this->path, $storage);
     }
 
-    public function loadFileData(object $survey, object $storage): void
+    public function loadFileData(object $survey, object $storage): int
     {
         $this->email = $survey->getParameterEmail();
         $this->path = "./data/" . $this->email . ".txt";
@@ -32,11 +35,9 @@ class SurveyFileStorage
             $survey->setParameterEmail($storage->getFileSubstring());
             $survey->setParameterAge($storage->getFileSubstring());
             fclose($this->file);
+            return 1;
         }
-        else
-        {
-            echo "Error upload: no such file or directory" . PHP_EOL;
-        }
+        return 0;
     }
 
     private function getSubstringInFile(array $arrayStrings): void

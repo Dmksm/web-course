@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Module\Survey;
+
 class RequestSurveyLoader
 {
     private object $survey;
@@ -17,7 +20,6 @@ class RequestSurveyLoader
         }
         else
         {
-            echo "don't got email!" . PHP_EOL;
             return null;
         }
     }

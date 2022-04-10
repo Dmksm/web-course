@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Module\Survey;
+
 class Survey 
 {
     private ?string $firstName;

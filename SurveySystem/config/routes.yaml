@@ -1,0 +1,7 @@
+Create_survey:
+    path: /save-survey
+    controller: App\Controller\SurveyController::saveSurvey
+Print_survey:
+    path: /print-survey
+    controller: App\Controller\SurveyController::printSurvey
+
