@@ -4,9 +4,7 @@ namespace App\Module\Survey;
 
 class RequestSurveyLoader
 {
-    private object $survey;
-
-    public function createNewSurvey(string $firstName, string $lastName, string $email, string $age): ?object
+    public function createNewSurvey(string $firstName, string $lastName, string $email, string $age): ?Survey
     { 
         $firstName = $_GET[$firstName] ?? null;
         $lastName = $_GET[$lastName] ?? null;
@@ -15,8 +13,7 @@ class RequestSurveyLoader
 
         if ($email)
         {
-            $this->survey = new Survey($firstName, $lastName, $email, $age);
-            return $this->survey;
+            return new Survey($firstName, $lastName, $email, $age);
         }
         else
         {

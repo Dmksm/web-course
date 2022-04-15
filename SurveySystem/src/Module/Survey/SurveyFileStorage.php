@@ -4,66 +4,70 @@ namespace App\Module\Survey;
 
 class SurveyFileStorage
 {
-    private $file;
-    private string $path;
-    private string $content;
-    private ?string $firstName;
-    private ?string $lastName;
-    private ?string $email;
-    private ?string $age;
-    private ?string $fileString;
+    private static ?string $firstName;
+    private static ?string $lastName;
+    private static ?string $email;
+    private static ?string $age;
 
-    public function saveData(object $survey, object $storage): void
-    {   
-        $this->firstName = $survey->getParameterFirstName();
-        $this->lastName = $survey->getParameterLastName();
-        $this->email = $survey->getParameterEmail();
-        $this->age = $survey->getParameterAge(); 
-        $this->path = "./data/" . $this->email . ".txt";
-        $storage->writeInFile($this->path, $storage);
+    public function saveData(Survey $survey): void
+    {
+        SurveyFileStorage::$firstName = $survey->getParameterFirstName();
+        SurveyFileStorage::$lastName = $survey->getParameterLastName();
+        SurveyFileStorage::$email = $survey->getParameterEmail();
+        SurveyFileStorage::$age = $survey->getParameterAge();
+        $path = "./data/" . SurveyFileStorage::$email . ".txt";
+        SurveyFileStorage::writeInFile($path);
     }
 
-    public function loadFileData(object $survey, object $storage): int
+    public function loadFileData(Survey $survey): bool
     {
-        $this->email = $survey->getParameterEmail();
-        $this->path = "./data/" . $this->email . ".txt";
-        if (file_exists($this->path))
+        $email = $survey->getParameterEmail();
+        $path = "./data/" . $email . ".txt";
+        if( is_dir('data') === false )
         {
-            $this->file = fopen($this->path, "r");
-            $survey->setParameterFirstName($storage->getFileSubstring());
-            $survey->setParameterLastName($storage->getFileSubstring());
-            $survey->setParameterEmail($storage->getFileSubstring());
-            $survey->setParameterAge($storage->getFileSubstring());
-            fclose($this->file);
+            mkdir('data');
+        }
+        if (file_exists($path))
+        {
+            $file = fopen($path, "r");
+            $survey->setParameterFirstName(SurveyFileStorage::getFileSubstring($file));
+            $survey->setParameterLastName(SurveyFileStorage::getFileSubstring($file));
+            $survey->setParameterEmail(SurveyFileStorage::getFileSubstring($file));
+            $survey->setParameterAge(SurveyFileStorage::getFileSubstring($file));
+            fclose($file);
             return 1;
         }
         return 0;
     }
 
-    private function getSubstringInFile(array $arrayStrings): void
-    { 
-        $this->firstName = $this->firstName ?? trim(substr($arrayStrings[0], strpos($arrayStrings[0], ':') + 1));
-        $this->lastName = $this->lastName ?? trim(substr($arrayStrings[1], strpos($arrayStrings[1], ':') + 1));
-        $this->age = $this->age ?? trim(substr($arrayStrings[3], strpos($arrayStrings[3], ':') + 1)); 
-    }
-
-    private function writeInFile(string $path, object $storage): void
+    private static function writeInFile(string $path): void
     {
+        if( is_dir('data') === false )
+        {
+            mkdir('data');
+        }
         if (file_exists($path))
         {
-            $this->file = fopen($path, "r");
-            $storage->getSubstringInFile(file($path));
-            fclose($this->file);
+            $file = fopen($path, "r");
+            SurveyFileStorage::getSubstringInFile(file($path));
+            fclose($file);
         }
-        $this->file = fopen($path, "w");
-        $this->content = "First Name:" . $this->firstName . PHP_EOL . "Last Name:" . $this->lastName . PHP_EOL . "Email:" . $this->email . PHP_EOL . "Age:" . $this->age;
-        fwrite($this->file, $this->content);
-        fclose($this->file);
+        $file = fopen($path, "w");
+        $content = "First Name:" . SurveyFileStorage::$firstName . PHP_EOL . "Last Name:" . SurveyFileStorage::$lastName . PHP_EOL . "Email:" . SurveyFileStorage::$email . PHP_EOL . "Age:" . SurveyFileStorage::$age;
+        fwrite($file, $content);
+        fclose($file);
     }
 
-    private function getFileSubstring(): ?string
+    private static function getSubstringInFile(array $arrayStrings): void
     {
-        $this->fileString = fgets($this->file);
-        return (trim(substr($this->fileString, strpos($this->fileString, ':') + 1)));
+        SurveyFileStorage::$firstName = SurveyFileStorage::$firstName ?? trim(substr($arrayStrings[0], strpos($arrayStrings[0], ':') + 1));
+        SurveyFileStorage::$lastName = SurveyFileStorage::$lastName ?? trim(substr($arrayStrings[1], strpos($arrayStrings[1], ':') + 1));
+        SurveyFileStorage::$age = SurveyFileStorage::$age ?? trim(substr($arrayStrings[3], strpos($arrayStrings[3], ':') + 1));
+    }
+
+    private static function getFileSubstring(mixed $file): ?string
+    {
+        $fileString = fgets($file);
+        return (trim(substr($fileString, strpos($fileString, ':') + 1)));
     }
 }

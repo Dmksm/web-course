@@ -15,9 +15,9 @@ class SurveyI extends AbstractController
         $storage = new SurveyFileStorage;
         $survey = $request->createNewSurvey('first_name', 'last_name', 'email', 'age');
         $surveyArray = ["Don't found email!", "", "", "", ""];
-        if ($survey and $storage->loadFileData($survey, $storage))
+        if ($survey and $storage->loadFileData($survey))
         {
-            $storage->loadFileData($survey, $storage);
+            $storage->loadFileData($survey);
             $surveyArray = ["Loading old data from file:", 'First name: ' . SurveyPrinter::printFirstName($survey), 'Last name: ' . SurveyPrinter::printLastName($survey), 'Email: ' . SurveyPrinter::printEmail($survey), 'Age: ' . SurveyPrinter::printAge($survey)];
         }
         return ['operation_with_survey' => $surveyArray[0],
