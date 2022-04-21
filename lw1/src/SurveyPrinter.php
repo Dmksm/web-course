@@ -1,7 +1,7 @@
 <?php
 class SurveyPrinter 
 { 
-    public static function printSurvey(object $survey): void
+    public static function printSurvey(Survey $survey): void
     { 
         if (file_exists("./data/" . $survey->getParameterEmail() . ".txt"))
         {

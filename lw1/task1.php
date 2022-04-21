@@ -1,8 +1,8 @@
 <?php
 header("Content-Type: text/plain");
 require_once("src/common.inc.php");
-$request = new RequestSurveyLoader;
-$storage = new SurveyFileStorage;
+$request = new RequestSurveyLoader();
+$storage = new SurveyFileStorage();
 $survey = $request->createNewSurvey('first_name', 'last_name', 'email', 'age'); 
 if ($survey)
 {
