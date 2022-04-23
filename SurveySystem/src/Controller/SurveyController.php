@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Module\Survey\RequestSurveyLoader;
-use App\Module\Survey\SurveyFileStorage;
 use App\Module\Survey\Service;
 use App\View\SurveyView;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

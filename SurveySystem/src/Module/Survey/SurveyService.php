@@ -2,9 +2,6 @@
 
 namespace App\Module\Survey;
 
-use App\Module\Survey\RequestSurveyLoader;
-use App\Module\Survey\SurveyFileStorage;
-
 class Service
 {
     private RequestSurveyLoader $request;
