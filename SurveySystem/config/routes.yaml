@@ -4,4 +4,8 @@ create_survey:
 print_survey:
     path: /print-survey
     controller: App\Controller\SurveyController::printSurvey
+page_survey:
+    path: /page
+    controller: App\Page\SurveyPage::viewPage
+
 

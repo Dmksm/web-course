@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href=" {{ asset('SurveyCss/style.css') }} ">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body class="body">
+<header class="header">
+    <article class="form">
+        <img class="form__image" src=" {{ asset('images/Welcome.png') }} " alt="картинка не загрузилась">
+        <h2 class="form__title">{{ operation_with_survey }}</h2>
+        <form class="form__user-form" enctype="multipart/form-data" method="post" action="/save-survey">
+            <input class="form__text-place" type="text" placeholder="First name" name="first_name">
+            <input class="form__text-place" type="text" placeholder="Last name" name="last_name">
+            <input class="form__text-place" type="text" placeholder="Email" name="email">
+            <input class="form__text-place" type="text" placeholder="Age" name="age">
+            <p class="form__text">Upload your photo (<10Mb)</p>
+            <input class="form__file" type="file" accept="image/*" name="avatar">
+            <button class="form__target" type="submit">Submit!</button>
+        </form>
+        <form class="form__user-form" enctype="multipart/form-data" method="post" action="/print-survey">
+            <h2 class="form__title">OR</h2>
+            <p class="form__title">Get survey</p>
+            <input class="form__text-place" type="text" placeholder="Email" name="email">
+            <button class="form__target" type="submit">Get!</button>
+        </form>
+    </article>
+</header>
+</body>
+</html>

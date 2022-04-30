@@ -24,6 +24,11 @@ class SurveyPrinter
         return SurveyPrinter::getContent($survey, 'age');
     }
 
+    public static function printAvatar(Survey $survey): ?string
+    {
+        return SurveyPrinter::getContent($survey, 'avatar');
+    }
+
     private static function getContent(Survey $survey, string $parameter): ?string
     {
         $content = null;
@@ -44,6 +49,10 @@ class SurveyPrinter
             if ($parameter === 'age')
             {
                 $content = $survey->getParameterAge();
+            }
+            if ($parameter === 'avatar')
+            {
+                $content = $survey->getParameterAvatar();
             }
         }
         return $content;

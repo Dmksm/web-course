@@ -8,13 +8,15 @@ class Survey
     private ?string $lastName;
     private ?string $email;
     private ?string $age;
+    private ?string $avatar;
 
-    public function __construct(?string $firstName, ?string $lastName, ?string $email, ?string $age)
+    public function __construct(?string $firstName, ?string $lastName, ?string $email, ?string $age, ?string $avatar)
     { 
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->age = $age;
+        $this->avatar = $avatar;
     }
 
     public function getParameterFirstName(): ?string
@@ -37,6 +39,11 @@ class Survey
         return $this->age;       
     }
 
+    public function getParameterAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
     public function setParameterFirstName(string $value): void
     {
         $this->firstName = $value;
@@ -55,5 +62,10 @@ class Survey
     public function setParameterAge(string $value): void
     {
         $this->age = $value;
+    }
+
+    public function setParameterAvatar(string $value): void
+    {
+        $this->avatar = $value;
     }
 }

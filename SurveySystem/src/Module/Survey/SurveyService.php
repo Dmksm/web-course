@@ -6,34 +6,34 @@ class Service
 {
     private RequestSurveyLoader $request;
     private SurveyFileStorage $storage;
+    private ?Survey $survey;
+    private string $title;
 
     function __construct()
     {
         $this->request = new RequestSurveyLoader();
         $this->storage = new SurveyFileStorage();
+        $this->survey = $this->request->createNewSurvey('first_name', 'last_name', 'email', 'age', 'avatar');
+        $this->title = "Don't found email!";
     }
 
     public function saveSurvey(): array
     {
-        $survey = $this->request->createNewSurvey('first_name', 'last_name', 'email', 'age');
-        $title = "Don't found email!";
-        if ($survey)
+        if ($this->survey)
         {
-            $this->storage->saveData($survey);
-            $title = "Done! Saved the survey:";
+            $this->storage->saveData($this->survey);
+            $this->title = "Done! Saved the survey:";
         }
-        return [$survey, $title];
+        return [$this->survey, $this->title];
     }
 
     public function printSurvey(): array
     {
-        $survey = $this->request->createNewSurvey('first_name', 'last_name', 'email', 'age');
-        $title = "Don't found email!";
-        if ($survey)
+        if ($this->survey)
         {
-            $this->storage->loadFileData($survey);
-            $title = "Loading old data from file:";
+            $this->storage->loadFileData($this->survey);
+            $this->title = "Loading old data from file:";
         }
-        return [$survey, $title];
+        return [$this->survey, $this->title];
     }
 }

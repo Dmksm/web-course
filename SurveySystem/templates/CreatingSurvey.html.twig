@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-  <title> Welcome! </title>
+  <link rel="stylesheet" href=" {{ asset('SurveyCss/style.css') }} ">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto&family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Welcome</title>
 </head>
-<body>
-  <p>{{ operation_with_survey }}</p>
-  <p>{{ first_name }}</p>
-  <p>{{ last_name }}</p>
-  <p>{{ email }}</p>
-  <p>{{ age }}</p>
+<body class="body">
+<header class="header">
+  <article class="form">
+    <h2 class="form__title">{{ operation_with_survey }}</h2>
+    <form class="form__user-form" enctype="multipart/form-data" method="post" action="/page">
+      <div class="form__text-place">{{ first_name }}</div>
+      <div class="form__text-place">{{ last_name }}</div>
+      <div class="form__text-place">{{ email }}</div>
+      <div class="form__text-place">{{ age }}</div>
+      <img class="form__image" src=" {{ avatar }} " alt="картинка не загрузилась">
+      <button class="form__target" type="submit">Go Home!</button>
+    </form>
+  </article>
+</header>
 </body>
 </html>
