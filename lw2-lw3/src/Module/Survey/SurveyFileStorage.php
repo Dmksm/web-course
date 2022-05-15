@@ -6,7 +6,12 @@ class SurveyFileStorage
 {
     public function saveData(Survey $survey): void
     {
-        self::writeInFile($survey->getParameterFirstName(), $survey->getParameterLastName(), $survey->getParameterEmail(), $survey->getParameterAge(), $survey->getParameterAvatar());
+        self::writeInFile(
+            $survey->getParameterFirstName(),
+            $survey->getParameterLastName(),
+            $survey->getParameterEmail(),
+            $survey->getParameterAge(),
+            $survey->getParameterAvatar());
     }
 
     public function loadFileData(Survey $survey): void
@@ -52,7 +57,7 @@ class SurveyFileStorage
         $firstName = $firstName ?? trim(substr($arrayStrings[0], strpos($arrayStrings[0], ':') + 1));
         $lastName = $lastName ?? trim(substr($arrayStrings[1], strpos($arrayStrings[1], ':') + 1));
         $age = $age ?? trim(substr($arrayStrings[3], strpos($arrayStrings[3], ':') + 1));
-        $age = $age ?? trim(substr($arrayStrings[4], strpos($arrayStrings[4], ':') + 1));
+        $avatar = $avatar ?? trim(substr($arrayStrings[4], strpos($arrayStrings[4], ':') + 1));
     }
 
     private static function getFileSubstring(?string $fileString): ?string
