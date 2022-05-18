@@ -12,6 +12,16 @@ class SurveyView
         return 'CreatingSurvey.html.twig';
     }
 
+    public static function getPage(): string
+    {
+        return 'CreatingPage.html.twig';
+    }
+
+    public static function getPageData(): array
+    {
+        return ['operation_with_survey' => 'SaveSurvey'];
+    }
+
     public static function getArgs(?Survey $survey, string $title): array
     {
         $surveyArray = ['', '', '', '', ''];

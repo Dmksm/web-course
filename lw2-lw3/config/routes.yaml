@@ -6,6 +6,6 @@ print_survey:
     controller: App\Controller\SurveyController::printSurvey
 page_survey:
     path: /page
-    controller: App\Page\SurveyPage::viewPage
+    controller: App\Controller\SurveyController::viewPage
 
 

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Module\Survey\RequestSurveyLoader;
 use App\Module\Survey\Service;
+use App\Module\Survey\SurveyFileStorage;
 use App\View\SurveyView;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +15,12 @@ class SurveyController extends AbstractController
 
     function __construct()
     {
-        $this->service = new Service();
+        $this->service = new Service(new RequestSurveyLoader(), new SurveyFileStorage());
+    }
+
+    public function viewPage()
+    {
+        return $this->render(SurveyView::getPage(), SurveyView::getPageData());
     }
 
     public function saveSurvey(): Response

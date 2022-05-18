@@ -9,10 +9,10 @@ class Service
     private ?Survey $survey;
     private string $title;
 
-    function __construct()
+    function __construct(RequestSurveyLoader $request, SurveyFileStorage $storage)
     {
-        $this->request = new RequestSurveyLoader();
-        $this->storage = new SurveyFileStorage();
+        $this->request = $request;
+        $this->storage = $storage;
         $this->survey = $this->request->createNewSurvey('first_name', 'last_name', 'email', 'age', 'avatar');
         $this->title = "Don't found email!";
     }

@@ -1,10 +1,3 @@
-create_survey:
-    path: /save-survey
-    controller: App\Controller\SurveyController::saveSurvey
-print_survey:
-    path: /print-survey
-    controller: App\Controller\SurveyController::printSurvey
-page_survey:
-    path: /page
-    controller: App\Page\SurveyPage::viewPage
-get_
+statements:
+    path: localhost://statements
+    controller: App\Controller\StatementController::getStatements
