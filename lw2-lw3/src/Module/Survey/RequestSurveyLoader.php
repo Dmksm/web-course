@@ -25,15 +25,15 @@ class RequestSurveyLoader
             }
             $pathFile = "./images/" . $avatarId . $format;
             move_uploaded_file($avatar["tmp_name"], $pathFile);
-            $avatar = $pathFile;
+            $avatarPath = $pathFile;
         }
         else
         {
-            $avatar = null;
+            $avatarPath = null;
         }
         if ($email)
         {
-            return new Survey($firstName, $lastName, $email, $age, $avatar);
+            return new Survey($firstName, $lastName, $email, $age, $avatarPath);
         }
         else
         {
